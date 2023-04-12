@@ -1,0 +1,52 @@
+def calcular_estadisticas(notas):
+    """
+    Función que calcula varias estadísticas sobre las notas de los estudiantes.
+
+    Args:
+    - notas (list): Lista de notas de un estudiante.
+
+    Returns:
+    - cantidad_notas (int): Cantidad de notas ingresadas.
+    - promedio (float): Promedio de las notas del estudiante.
+    - nota_minima (float): Nota más baja.
+    - nota_maxima (float): Nota más alta.
+    - cantidad_notas_bajo_promedio (int): Cantidad de notas por debajo del promedio.
+    - cantidad_notas_sobre_promedio (int): Cantidad de notas por encima del promedio.
+    """
+
+    cantidad_notas = len(notas)
+    promedio = sum(notas) / cantidad_notas
+    nota_minima = min(notas)
+    nota_maxima = max(notas)
+    cantidad_notas_bajo_promedio = sum(1 for nota in notas if nota < promedio)
+    cantidad_notas_sobre_promedio = sum(1 for nota in notas if nota > promedio)
+
+    return cantidad_notas, promedio, nota_minima, nota_maxima, cantidad_notas_bajo_promedio, cantidad_notas_sobre_promedio
+
+
+# Ingreso de notas por cada alumno
+notas_totales = []
+while True:
+    notas_alumno = []
+    while True:
+        nota = float(input("Ingrese una nota (o 0 para finalizar): "))
+        if nota == 0:
+            break
+        elif nota < 1.0 or nota > 7.0:
+            print("Por favor ingrese una nota válida entre 1.0 y 7.0.")
+            continue
+        notas_alumno.append(nota)
+    if len(notas_alumno) == 0:
+        break
+    notas_totales.extend(notas_alumno)
+
+# Cálculo de estadísticas
+cantidad_notas, promedio, nota_minima, nota_maxima, cantidad_notas_bajo_promedio, cantidad_notas_sobre_promedio = calcular_estadisticas(notas_totales)
+
+# Impresión de resultados
+print("Cantidad de notas ingresadas: ", cantidad_notas)
+print("Promedio del alumno: ", promedio)
+print("Nota más baja: ", nota_minima)
+print("Nota más alta: ", nota_maxima)
+print("Cantidad de notas por debajo del promedio: ", cantidad_notas_bajo_promedio)
+print("Cantidad de notas por encima del promedio: ", cantidad_notas_sobre_promedio)
